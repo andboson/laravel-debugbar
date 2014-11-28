@@ -26,6 +26,7 @@ return array(
      |
      */
     'storage' => array(
+        'driver' => 'redis', // redis, file
         'enabled' => true,
         'path' => storage_path() . '/debugbar',
     ),
