@@ -10,6 +10,7 @@ use Barryvdh\Debugbar\DataCollector\SessionCollector;
 use Barryvdh\Debugbar\DataCollector\SymfonyRequestCollector;
 use Barryvdh\Debugbar\DataCollector\ViewCollector;
 use Barryvdh\Debugbar\Storage\FilesystemStorage;
+use Barryvdh\Debugbar\Storage\RedisStorage;
 use DebugBar\Bridge\MonologCollector;
 use DebugBar\Bridge\SwiftMailer\SwiftLogCollector;
 use DebugBar\Bridge\SwiftMailer\SwiftMailCollector;
@@ -22,6 +23,7 @@ use DebugBar\DataCollector\RequestDataCollector;
 use DebugBar\DataCollector\TimeDataCollector;
 use DebugBar\DebugBar;
 use Exception;
+use \Illuminate\Support\Facades\Redis as Redis;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -763,7 +765,7 @@ class LaravelDebugbar extends DebugBar
     {
         if ($this->app['config']->get('laravel-debugbar::config.storage.enabled')) {
             if ($this->app['config']->get('laravel-debugbar::config.storage.driver')) {
-                $driver = Config::get('laravel-debugbar::config.storage.driver');
+                $driver = \Config::get('laravel-debugbar::config.storage.driver');
 
                 switch ($driver) {
                     case 'redis':
